@@ -9,9 +9,15 @@
 import UIKit
 
 class ResultList: UIViewController {
-
+    
+    @IBOutlet weak var destinationAdress: UILabel!
+    
+    var adress = "empty"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        destinationAdress.text = adress
 
         // Do any additional setup after loading the view.
     }

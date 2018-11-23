@@ -14,7 +14,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
 
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    
     var locationManager = CLLocationManager()
+    var destinationAdress = ""
     
     
 //    @IBAction func closeKeyboard(sender: MKMapView) {
@@ -76,16 +78,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         print("Unable to access your current location")
     }
     
+//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+//        if let n = destinationTextField.text {
+//            destinationAdress = n
+//        }
+//        print("endEdit")
+//    }
+    
     //MARK:- UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        //Stack input text in variable
+        if let n = destinationTextField.text {
+            destinationAdress = n
+        }
+
+        //Init push
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let balanceViewController = storyBoard.instantiateViewController(withIdentifier: "result") as! ResultList
-        self.navigationController?.pushViewController(balanceViewController, animated: true)
+        let resultListController = storyBoard.instantiateViewController(withIdentifier: "result") as! ResultList
+
+        //Send destinationAdress in resultListController
+        resultListController.adress = destinationAdress
         
+        self.navigationController?.pushViewController(resultListController, animated: true)
+
         return true
     }
+    
     
     
 
