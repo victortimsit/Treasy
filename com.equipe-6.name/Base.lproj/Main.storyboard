@@ -155,7 +155,7 @@ Name</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.sublayerTrasnform">
                                         <integer key="value" value="0"/>
@@ -194,10 +194,10 @@ Name</string>
             </objects>
             <point key="canvasLocation" x="454" y="884"/>
         </scene>
-        <!--Results-->
+        <!--Result List-->
         <scene sceneID="gfB-D0-NEj">
             <objects>
-                <viewController id="0UE-sY-RCm" customClass="Results" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="result" id="0UE-sY-RCm" customClass="ResultList" customModule="com_equipe_6_name" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3KI-Xh-xkW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -15,6 +15,7 @@
 		34DE4C3321A532CC00DA839C /* com_equipe_6_nameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE4C3221A532CC00DA839C /* com_equipe_6_nameTests.swift */; };
 		34DE4C3E21A532CC00DA839C /* com_equipe_6_nameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE4C3D21A532CC00DA839C /* com_equipe_6_nameUITests.swift */; };
 		34DE4C5021A5773200DA839C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DE4C4F21A5773100DA839C /* MapViewController.swift */; };
+		34FC853621A88AA9002E4502 /* ResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FC853521A88AA9002E4502 /* ResultList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		34DE4C3D21A532CC00DA839C /* com_equipe_6_nameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = com_equipe_6_nameUITests.swift; sourceTree = "<group>"; };
 		34DE4C3F21A532CC00DA839C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DE4C4F21A5773100DA839C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		34FC853521A88AA9002E4502 /* ResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		34DE4C1C21A532CA00DA839C /* com.equipe-6.name */ = {
 			isa = PBXGroup;
 			children = (
+				34FC853521A88AA9002E4502 /* ResultList.swift */,
 				34DE4C1D21A532CA00DA839C /* AppDelegate.swift */,
 				34DE4C1F21A532CA00DA839C /* ViewController.swift */,
 				34DE4C4F21A5773100DA839C /* MapViewController.swift */,
@@ -261,6 +264,7 @@
 			files = (
 				34DE4C2021A532CA00DA839C /* ViewController.swift in Sources */,
 				34DE4C5021A5773200DA839C /* MapViewController.swift in Sources */,
+				34FC853621A88AA9002E4502 /* ResultList.swift in Sources */,
 				34DE4C1E21A532CA00DA839C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

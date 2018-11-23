@@ -80,10 +80,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-//        performSegue(withIdentifier: "search", sender: nil)
-        
-        let secondViewController = self.storyboard.instantiateViewControllerWithIdentifier("result") as result
-        self.navigationController.pushViewController(secondViewController, animated: true)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let balanceViewController = storyBoard.instantiateViewController(withIdentifier: "result") as! ResultList
+        self.navigationController?.pushViewController(balanceViewController, animated: true)
         
         return true
     }
