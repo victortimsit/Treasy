@@ -28,10 +28,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
         destinationTextField.delegate = self
         
         
-        // Do any additional setup after loading the view.
+        
+        
+        
+        // Geolocation
         mapView.showsUserLocation = true
         
         if CLLocationManager.locationServicesEnabled() == true {
@@ -88,6 +92,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
     //MARK:- UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchPlaceFromGoogle(place: textField.text!)
+        
         //Stack input text in variable
         if let n = destinationTextField.text {
             destinationAdress = n
@@ -103,6 +109,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         self.navigationController?.pushViewController(resultListController, animated: true)
 
         return true
+    }
+    
+    func searchPlaceFromGoogle(place: String) {
+        var strGoogleApi = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(place)&key=AIzaSyCwaprHsKUC-l-Tnca98j378Mu6xdAxYUs"
+        
+        strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
+        
+        urlRequest.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) {
+            (data, response, error) in
+            
+            if error == nil {
+                let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                
+                print("json == \(jsonDict)")
+            } else {
+                print("error connecting google API")
+            }
+        }
+        task.resume()
     }
     
     

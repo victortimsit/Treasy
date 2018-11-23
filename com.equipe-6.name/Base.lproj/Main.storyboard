@@ -105,7 +105,6 @@ Name</string>
         <!--Navigation Controller-->
         <scene sceneID="qlV-fS-WbX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yw4-v5-sVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="KY8-dr-0vM" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gxr-O8-XEo">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -115,6 +114,7 @@ Name</string>
                         <segue destination="JWY-o3-x77" kind="relationship" relationship="rootViewController" id="fSL-18-16D"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yw4-v5-sVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-738" y="884"/>
         </scene>
@@ -155,7 +155,7 @@ Name</string>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.sublayerTrasnform">
                                         <integer key="value" value="0"/>
