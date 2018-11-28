@@ -2,4 +2,84 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "com.equipe-6.name/ResultList.swift"
+            timestampString = "565132602.241993"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ResultList"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "com_equipe_6_name.ResultList.adress.getter : Swift.String"
+                  moduleName = "com.equipe-6.name"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/victortimsit/Documents/HETIC/H3/dev%20IOS/com.equipe-6.name/com.equipe-6.name/ResultList.swift"
+                  timestampString = "565128414.569163"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "123">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "com_equipe_6_name.ResultList.adress.setter : Swift.String"
+                  moduleName = "com.equipe-6.name"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/victortimsit/Documents/HETIC/H3/dev%20IOS/com.equipe-6.name/com.equipe-6.name/ResultList.swift"
+                  timestampString = "565128414.5764771"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "137">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "com_equipe_6_name.ResultList.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; com_equipe_6_name.ResultList"
+                  moduleName = "com.equipe-6.name"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/victortimsit/Documents/HETIC/H3/dev%20IOS/com.equipe-6.name/com.equipe-6.name/ResultList.swift"
+                  timestampString = "565128414.582466"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "173">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "com_equipe_6_name.ResultList.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;com_equipe_6_name.ResultList&gt;"
+                  moduleName = "com.equipe-6.name"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/victortimsit/Documents/HETIC/H3/dev%20IOS/com.equipe-6.name/com.equipe-6.name/ResultList.swift"
+                  timestampString = "565128414.585777"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -10,13 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+    
 
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var tablePlaces: UITableView!
     
     var locationManager = CLLocationManager()
     var destinationAdress = ""
+    var resultsArray:[Dictionary<String, AnyObject>] = Array()
     
     
 //    @IBAction func closeKeyboard(sender: MKMapView) {
@@ -29,10 +32,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        destinationTextField.addTarget(self, action: #selector(searchPlaceFromGoogle(_:)), for: .editingChanged)
+        
+        
         destinationTextField.delegate = self
         
+        tablePlaces.estimatedRowHeight = 44.0
+        tablePlaces.dataSource = self
+        tablePlaces.delegate = self
         
-        
+        tablePlaces?.backgroundColor = UIColor(white: 1, alpha: 0)
         
         
         // Geolocation
@@ -51,6 +60,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
             locationManager.desiredAccuracy = 1.0
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
+//            let coordinate: CLLocationCoordinate2D
+            print(locationManager)
             
         } else {
             print("Please turn on location services or GPS")
@@ -69,6 +80,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    //MARK:- UITableViewDataSource and UITableViewDelegate
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return resultsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell")
+        
+        if let labelPlaceName = cell?.contentView.viewWithTag(102) as? UILabel {
+            
+            let place = self.resultsArray[indexPath.row]
+            labelPlaceName.text = "\(place["description"] as! String)"
+//            print("place : \(place)")
+        }
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        //Init push
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultListController = storyBoard.instantiateViewController(withIdentifier: "result") as! ResultList
+        
+        //Send destinationAdress in resultListController
+        
+        if let description = self.resultsArray[indexPath.row]["description"] as? String {
+            destinationTextField.text = description
+        }
+        if let placeID = self.resultsArray[indexPath.row]["place_id"] as? String {
+            resultListController.placeID = placeID
+    
+        }
+        
+        self.navigationController?.pushViewController(resultListController, animated: true)
     }
     
     //MARK:- CLLocationManager Delegates
@@ -90,9 +145,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
 //    }
     
     //MARK:- UITextFieldDelegate
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tablePlaces?.backgroundColor = UIColor(white: 1, alpha: 1)
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchPlaceFromGoogle(place: textField.text!)
         
         //Stack input text in variable
         if let n = destinationTextField.text {
@@ -104,34 +160,57 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UITextFiel
         let resultListController = storyBoard.instantiateViewController(withIdentifier: "result") as! ResultList
 
         //Send destinationAdress in resultListController
-        resultListController.adress = destinationAdress
+//        resultListController.adress = destinationAdress
         
         self.navigationController?.pushViewController(resultListController, animated: true)
 
         return true
     }
     
-    func searchPlaceFromGoogle(place: String) {
-        var strGoogleApi = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(place)&key=AIzaSyCwaprHsKUC-l-Tnca98j378Mu6xdAxYUs"
-        
-        strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        
-        var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
-        
-        urlRequest.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: urlRequest) {
-            (data, response, error) in
+    @objc func searchPlaceFromGoogle(_ textField:UITextField) {
+        if let place = textField.text {
+            var strGoogleApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=\(place)&location=48.8667,2.4333&radius=1&key=AIzaSyCwaprHsKUC-l-Tnca98j378Mu6xdAxYUs"
             
-            if error == nil {
-                let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+            strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            
+            var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
+            
+            urlRequest.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: urlRequest) {
+                (data, response, error) in
                 
-                print("json == \(jsonDict)")
-            } else {
-                print("error connecting google API")
+                if error == nil {
+                    
+                    if let responseData = data {
+                        //                    print("response DATA : \(responseData)")
+        
+                        //                    let jsonDict = try? JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+                        let jsonDict = try? JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.allowFragments)
+//                        print("response JSONDICT : \(jsonDict)")
+                        
+                        if let dict = jsonDict as? Dictionary<String, AnyObject>{
+                            
+                            if let predictions = dict["predictions"] as? [Dictionary<String, AnyObject>] {
+                                //                             print("json == \(results)")
+                                self.resultsArray.removeAll()
+                                for dictionary in predictions {
+                                    self.resultsArray.append(dictionary)
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    self.tablePlaces.reloadData()
+                                }
+                            }
+                        }
+                    }
+                    
+                } else {
+                    print("error connecting google API")
+                }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     
